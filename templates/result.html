@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fish Classification Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        .fish-image {
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .result-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fish Classification Result</h1>
+    <div class="result-text">The predicted fish class is: {{ predicted_fish }}</div>
+    
+    {% if predicted_fish == "Trout" %}
+    <img src="https://example.com/trout.jpg" alt="Trout" class="fish-image">
+    {% elif predicted_fish == "Salmon" %}
+    <img src="https://example.com/salmon.jpg" alt="Salmon" class="fish-image">
+    {% elif predicted_fish == "Bass" %}
+    <img src="https://example.com/bass.jpg" alt="Bass" class="fish-image">
+    {% else %}
+    <p>No image available for this fish class.</p>
+    {% endif %}
+</body>
+</html>
