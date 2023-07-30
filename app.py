@@ -1,11 +1,33 @@
 from flask import Flask, render_template, request
+import pickle
+
 
 app = Flask(__name__)
 
 # Replace this with your actual machine learning model
 def predict_fish(weight, length1, length2, length3, height, width):
+    # Load the Pickle model during app startup
+    with open('FISH_CLASSIFICATION_MODEL_SVC.pkl', 'rb') as file:
+        model = pickle.load(file)
+    prediction = model.predict([[weight, length1, length2, length3, height, width]])
+
+        # Given dictionary mapping fish species names to numeric labels
+    fish_species_dict = {
+        0: "Bream",
+        1: "Roach",
+        2: "Whitefish",
+        3: "Parkki",
+        4: "Perch",
+        5: "Pike",
+        6: "Smelt"
+    }
+
+    # Assuming 'prediction' contains the numeric label predicted by the model
+    predicted_label = prediction[0]
+    predicted_species = fish_species_dict.get(predicted_label)
+
     # Mocking the prediction by returning a fixed class label
-    return "Trout"
+    return predicted_species
 
 @app.route("/", methods=["GET"])
 def index():
